@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7f3ea">
+  <meta name="description" content="一份有点笨拙、但百分百认真的心动快递。接住爱心，拆开属于你的告白。">
+  <title>心动投递局 · 有一份喜欢待签收</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <svg class="svg-defs" aria-hidden="true"><defs>
+    <symbol id="icon-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></symbol>
+    <symbol id="icon-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/></symbol>
+  </defs></svg>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="心动投递局首页"><span class="brand-symbol"><svg><use href="#icon-heart"/></svg></span><span>心动投递局<small>THE LOVE POST</small></span></a>
+      <button id="customize" class="text-button"><svg class="icon"><use href="#icon-mail"/></svg>定制这封信<span aria-hidden="true">↗</span></button>
+    </header>
+    <main id="main">
+      <section id="intro" class="screen intro-screen" aria-labelledby="intro-title">
+        <div class="intro-copy">
+          <div class="eyebrow"><span class="status-dot"></span>今日营业 · 专送喜欢</div>
+          <h1 id="intro-title">有一份<span class="title-heart">喜欢<svg><use href="#icon-spark"/></svg></span>，<br>想亲手交给你。</h1>
+          <p class="lead">寄件人有点胆小，快递有点可疑。<br>里面装着一句，练习了很久的话。</p>
+          <div class="hero-actions"><button id="start" class="button primary">签收这份心动<svg class="icon"><use href="#icon-arrow"/></svg></button><button id="suspicious" class="text-button quiet">不会是诈骗吧？</button></div>
+          <p class="small-note"><span aria-hidden="true">↳</span> 一个大约 30 秒的、略带私心的小游戏</p>
+        </div>
+        <div class="parcel-scene" aria-hidden="true">
+          <span class="scene-star star-one">✳</span><span class="scene-star star-two">✦</span>
+          <div class="postmark">SPECIAL DELIVERY<span>100% 真心</span><small>LOVE POST · NO. 001</small></div>
+          <div class="letter-peek"><span>TO: <b data-recipient>特别的你</b></span><span class="peek-line"></span><span class="peek-line short"></span><svg><use href="#icon-heart"/></svg></div>
+          <div class="envelope"><div class="envelope-fold"></div><div class="seal"><svg><use href="#icon-heart"/></svg></div><div class="envelope-bottom">HANDLE WITH LOVE</div></div>
+          <span class="parcel-caption">内含心动，请轻拿轻放 <span>⤴</span></span>
+          <div class="delivery-label"><span>易 心 动</span><small>FRAGILE HEART INSIDE</small></div>
+        </div>
+      </section>
+      <section id="game" class="screen game-screen" hidden aria-labelledby="game-title">
+        <div class="section-top"><span class="eyebrow">01 / 收集心动</span><button class="text-button quiet" id="skip">直接拆信 <span>↗</span></button></div>
+        <h2 id="game-title" tabindex="-1">糟糕，喜欢撒了一地。</h2>
+        <p class="section-lead">帮我捡起 <strong>3 颗心</strong>，就能打开这封信。</p>
+        <div class="game-board" aria-label="点击爱心收集，键盘可用 Tab 和 Enter 操作">
+          <div class="board-label">LOST & FOUND / 心动失物招领</div>
+          <button class="collect-heart heart-one" data-heart="偏爱" aria-label="捡起第一颗心：偏爱"><svg><use href="#icon-heart"/></svg><span>偏爱</span></button>
+          <button class="collect-heart heart-two" data-heart="惦记" aria-label="捡起第二颗心：惦记"><svg><use href="#icon-heart"/></svg><span>惦记</span></button>
+          <button class="collect-heart heart-three" data-heart="想见你" aria-label="捡起第三颗心：想见你"><svg><use href="#icon-heart"/></svg><span>想见你</span></button>
+          <button class="decoy decoy-one" data-joke="这个是恋爱脑的 CPU，已经过热了。">🧠 <span>恋爱脑</span></button>
+          <button class="decoy decoy-two" data-joke="这块小饼干是顺路带给你的，算赠品。">🍪 <span>小饼干</span></button>
+          <span class="board-doodle doodle-one" aria-hidden="true">✧</span><span class="board-doodle doodle-two" aria-hidden="true">♡</span>
+        </div>
+        <div class="game-progress"><div class="heart-slots" aria-hidden="true"><span>♡</span><span>♡</span><span>♡</span></div><p id="progress" role="status">已收集 0 / 3 · 喜欢正在归位</p></div>
+      </section>
+      <section id="letter" class="screen letter-screen" hidden aria-labelledby="letter-title">
+        <div class="section-top"><span class="eyebrow">02 / 请本人亲启</span><span class="delivered"><span class="status-dot"></span>已送达</span></div>
+        <article class="confession-paper"><div class="paper-top"><span>DEAR <b data-recipient>特别的你</b></span><svg class="icon"><use href="#icon-heart"/></svg></div><h2 id="letter-title" tabindex="-1">其实，<br>我喜欢你。</h2><p id="letter-message">不是手滑发错人，<br>是想了很久，才点下发送。<br><br>想和你一起吃饭、散步，<br>把平平无奇的日子，过成值得期待的明天。</p><div class="signature"><span>笨拙但认真的</span><strong data-sender>某个喜欢你的人</strong><span class="signature-heart" aria-hidden="true">♡</span></div></article>
+        <p class="question">所以，要不要给我们一个机会？</p>
+        <div class="answer-actions"><button id="yes" class="button primary">好呀，我签收了<svg class="icon"><use href="#icon-heart"/></svg></button><button id="think" class="button secondary">让我想想</button></div>
+        <button id="decline" class="text-button decline">谢谢你的喜欢</button>
+      </section>
+      <section id="result" class="screen result-screen" hidden aria-labelledby="result-title">
+        <div class="result-symbol" aria-hidden="true"><svg><use href="#icon-heart"/></svg><span>✦</span></div>
+        <p class="eyebrow" id="result-label">DELIVERY COMPLETE</p><h2 id="result-title" tabindex="-1">签收成功，<br>快乐有点超标。</h2><p class="result-copy" id="result-copy"></p>
+        <div class="receipt"><span>心动回执</span><strong id="receipt-text">双向奔赴 · 待续</strong><small>NO. 001 / 一份喜欢，认真送达</small></div>
+        <div class="result-actions"><button id="share" class="button primary">复制这份心动的链接<svg class="icon"><use href="#icon-mail"/></svg></button><button id="replay" class="text-button quiet">再玩一次 ↻</button></div>
+        <p class="small-note">这份回应只在此刻的页面里，记得亲口告诉对方。</p>
+      </section>
+      <div class="post-promises" id="promises"><span><svg class="icon"><use href="#icon-mail"/></svg>包邮，包真心</span><span><svg class="icon"><use href="#icon-spark"/></svg>附赠一点傻笑</span><span><svg class="icon"><use href="#icon-heart"/></svg>喜欢，没有保质期</span></div>
+    </main>
+    <footer><span>© 心动投递局</span><p>世界很大，还好这封信找到了你。</p><span class="footer-mark">MADE WITH <svg class="icon"><use href="#icon-heart"/></svg></span></footer>
+  </div>
+  <div id="confetti" aria-hidden="true"></div><div id="toast" class="toast" role="status" hidden></div>
+  <dialog id="custom-dialog" aria-labelledby="custom-title"><form id="custom-form"><div class="dialog-heading"><span class="eyebrow">MAKE IT PERSONAL</span><button type="button" id="close-custom" class="close-button" aria-label="关闭定制窗口">×</button></div><h2 id="custom-title">把心意写成你的。</h2><p class="dialog-copy">填好后，复制链接发给那个特别的人。</p><label for="recipient">收件人</label><input id="recipient" name="to" maxlength="20" placeholder="特别的你" autocomplete="off"><label for="sender">你的署名</label><input id="sender" name="from" maxlength="20" placeholder="某个喜欢你的人" autocomplete="off"><label for="message">想说的话 <span>选填</span></label><textarea id="message" name="message" maxlength="240" rows="4" placeholder="想和你一起，把普通的日子变得特别。"></textarea><p class="privacy-note">这些文字会写进分享链接，收到链接的人可以看到。</p><button type="submit" class="button primary">保存并复制分享链接<svg class="icon"><use href="#icon-arrow"/></svg></button><div id="copy-fallback" hidden><label for="share-url">长按或选中复制链接</label><input id="share-url" readonly></div></form></dialog>
+</body>
+</html>
