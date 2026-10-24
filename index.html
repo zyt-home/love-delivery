@@ -7,8 +7,8 @@
   <meta name="description" content="一份有点笨拙、但百分百认真的心动快递。接住爱心，拆开属于你的告白。">
   <title>心动投递局 · 有一份喜欢待签收</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css">
-  <script src="./app.js" defer></script>
+  <link rel="stylesheet" href="./style.css?v=2">
+  <script src="./app.js?v=2" defer></script>
 </head>
 <body>
   <svg class="svg-defs" aria-hidden="true"><defs>
@@ -29,7 +29,7 @@
           <h1 id="intro-title">有一份<span class="title-heart">喜欢<svg><use href="#icon-spark"/></svg></span>，<br>想亲手交给你。</h1>
           <p class="lead">寄件人有点胆小，快递有点可疑。<br>里面装着一句，练习了很久的话。</p>
           <div class="hero-actions"><button id="start" class="button primary">签收这份心动<svg class="icon"><use href="#icon-arrow"/></svg></button><button id="suspicious" class="text-button quiet">不会是诈骗吧？</button></div>
-          <p class="small-note"><span aria-hidden="true">↳</span> 一个大约 30 秒的、略带私心的小游戏</p>
+          <p class="small-note"><span aria-hidden="true">↳</span> 五站心动旅程 · 完整体验约 5 分钟 · 随时可以休息</p>
         </div>
         <div class="parcel-scene" aria-hidden="true">
           <span class="scene-star star-one">✳</span><span class="scene-star star-two">✦</span>
@@ -41,26 +41,24 @@
         </div>
       </section>
       <section id="game" class="screen game-screen" hidden aria-labelledby="game-title">
-        <div class="section-top"><span class="eyebrow">01 / 收集心动</span><button class="text-button quiet" id="skip">直接拆信 <span>↗</span></button></div>
-        <h2 id="game-title" tabindex="-1">糟糕，喜欢撒了一地。</h2>
-        <p class="section-lead">帮我捡起 <strong>3 颗心</strong>，就能打开这封信。</p>
-        <div class="game-board" aria-label="点击爱心收集，键盘可用 Tab 和 Enter 操作">
-          <div class="board-label">LOST & FOUND / 心动失物招领</div>
-          <button class="collect-heart heart-one" data-heart="偏爱" aria-label="捡起第一颗心：偏爱"><svg><use href="#icon-heart"/></svg><span>偏爱</span></button>
-          <button class="collect-heart heart-two" data-heart="惦记" aria-label="捡起第二颗心：惦记"><svg><use href="#icon-heart"/></svg><span>惦记</span></button>
-          <button class="collect-heart heart-three" data-heart="想见你" aria-label="捡起第三颗心：想见你"><svg><use href="#icon-heart"/></svg><span>想见你</span></button>
-          <button class="decoy decoy-one" data-joke="这个是恋爱脑的 CPU，已经过热了。">🧠 <span>恋爱脑</span></button>
-          <button class="decoy decoy-two" data-joke="这块小饼干是顺路带给你的，算赠品。">🍪 <span>小饼干</span></button>
-          <span class="board-doodle doodle-one" aria-hidden="true">✧</span><span class="board-doodle doodle-two" aria-hidden="true">♡</span>
-        </div>
-        <div class="game-progress"><div class="heart-slots" aria-hidden="true"><span>♡</span><span>♡</span><span>♡</span></div><p id="progress" role="status">已收集 0 / 3 · 喜欢正在归位</p></div>
+        <div class="section-top"><span class="eyebrow" id="stage-label">01 / 心动接收站</span><button class="text-button quiet" id="skip">直接读信 ↗</button></div>
+        <ol class="route" aria-label="心动旅程"><li>接心动</li><li>翻回忆</li><li>记暗号</li><li>选礼物</li><li>约个会</li></ol>
+        <h2 id="game-title" tabindex="-1">喜欢正在向你靠近。</h2>
+        <p id="stage-description" class="section-lead"></p>
+        <div class="journey-meta"><span id="stage-score" role="status">本关收集 0</span><span id="stage-clock">准备出发</span></div>
+        <div class="time-track" aria-hidden="true"><span id="time-fill"></span></div>
+        <div id="playfield" class="playfield"></div>
+        <p id="stage-feedback" class="stage-feedback" role="status"></p>
+        <div class="journey-controls"><button id="stage-start" class="button primary">开始这一站</button><button id="stage-next" class="button primary" hidden>下一站 →</button><button id="pause" class="text-button" hidden>暂停一下</button><button id="exit-game" class="text-button quiet">先回首页</button></div>
+        <p class="small-note">前四站各 60 秒，最后一站慢慢选。切换页面或定制信件时自动暂停；不计输赢，只收集开心。</p>
       </section>
       <section id="letter" class="screen letter-screen" hidden aria-labelledby="letter-title">
-        <div class="section-top"><span class="eyebrow">02 / 请本人亲启</span><span class="delivered"><span class="status-dot"></span>已送达</span></div>
+        <div class="section-top"><span class="eyebrow">终点 / 请本人亲启</span><span class="delivered"><span class="status-dot"></span>已送达</span></div>
         <article class="confession-paper"><div class="paper-top"><span>DEAR <b data-recipient>特别的你</b></span><svg class="icon"><use href="#icon-heart"/></svg></div><h2 id="letter-title" tabindex="-1">其实，<br>我喜欢你。</h2><p id="letter-message">不是手滑发错人，<br>是想了很久，才点下发送。<br><br>想和你一起吃饭、散步，<br>把平平无奇的日子，过成值得期待的明天。</p><div class="signature"><span>笨拙但认真的</span><strong data-sender>某个喜欢你的人</strong><span class="signature-heart" aria-hidden="true">♡</span></div></article>
         <p class="question">所以，要不要给我们一个机会？</p>
         <div class="answer-actions"><button id="yes" class="button primary">好呀，我签收了<svg class="icon"><use href="#icon-heart"/></svg></button><button id="think" class="button secondary">让我想想</button></div>
-        <button id="decline" class="text-button decline">谢谢你的喜欢</button>
+        <div class="runaway-card"><div class="runaway-heading"><span>拒绝受理窗口</span><small>今日窗口有点调皮</small></div><p id="runaway-note">试试看，能不能抓住这颗嘴硬的心？</p><div id="runaway-arena"><button id="runaway" class="button secondary" aria-label="拒绝，趣味按钮，会躲开">拒绝一下</button><span class="runaway-watermark" aria-hidden="true">CATCH ME IF YOU CAN ♡</span></div></div>
+        <button id="decline" class="text-button decline">认真回答：谢谢，我先离开</button>
       </section>
       <section id="result" class="screen result-screen" hidden aria-labelledby="result-title">
         <div class="result-symbol" aria-hidden="true"><svg><use href="#icon-heart"/></svg><span>✦</span></div>
