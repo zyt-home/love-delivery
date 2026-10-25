@@ -52,15 +52,15 @@
   $('exit-game').addEventListener('click', () => showScreen('intro'));
 
   const stages = [
-    ['心动接收站', '喜欢正在向你靠近。', '点亮的格子里藏着心动。接住爱心、花朵和信封，别把闹钟也寄出去。'],
+    ['心动接收站', '喜欢正在向你靠近。', '点亮哪个格子，就点哪里。爱心、花朵和信封都能收集；遇到闹钟就等下一颗，不扣分。'],
     ['回忆照相馆', '原来，我们这么合拍。', '翻开两张卡片，找到相同的小美好。配完一组，会有新的回忆送达。'],
-    ['专属暗号局', '把这串心动，记在心里。', '看清亮起的顺序，再按相同顺序点回来。记错没关系，暗号会重新播放。'],
+    ['专属暗号局', '把这串心动，记在心里。', '从 2 个暗号开始，最多 4 个。先看亮起的顺序，再照着点；忘记了可以随时重播，不扣分。'],
     ['礼物分拣处', '什么都想留一份给你。', '鲜花、奶茶、拥抱送给你；加班、烦恼和坏天气，统统退回。'],
     ['约会放映室', '把下次见面，提前排练。', '六个没有标准答案的小问题。选出你的心意，我们把它装进约会邀请。']
   ];
   let stage = 0, running = false, paused = false, elapsed = 0, tick = 0, lastTick = 0;
   let score = 0, state = {}, nextEvent = 0, choices = [];
-  const symbols = ['🌷','🧋','🌙','🍰','🎧','🐈'];
+  const symbols = ['🌷','🧋','🌙','🍰'];
   const quiz = [
     ['见面第一件事，想做什么？', ['先买两杯奶茶','一起慢慢散步','去吃惦记很久的店'], '收到，约会第一条已记在小本本上。'],
     ['突然下雨了，我们怎么办？', ['躲进小书店','撑同一把伞','找家咖啡馆听雨'], '天气预报：有雨，局部地区有心动。'],
@@ -163,9 +163,9 @@
   }
   function spawnCatch() {
     state.cells.forEach((b,i) => {b.textContent = '·'; b.classList.remove('lit'); b.setAttribute('aria-label', `第 ${i+1} 格，等待心动`);});
-    state.target = Math.floor(Math.random()*9); state.good = Math.random() > .23; state.caught = false;
+    state.target = Math.floor(Math.random()*9); state.good = Math.random() > .12; state.caught = false;
     const button = state.cells[state.target]; button.textContent = state.good ? ['💌','💗','🌷'][score % 3] : '⏰';
-    button.setAttribute('aria-label',state.good ? '接住心动' : '闹钟，不用接'); button.classList.add('lit'); nextEvent = elapsed + 1500;
+    button.setAttribute('aria-label',state.good ? '接住心动' : '闹钟，不用接'); button.classList.add('lit'); nextEvent = elapsed + 2400;
   }
   function initMemory() {
     state.deck = shuffle([...symbols,...symbols]); state.open = []; state.matched = 0; state.resolveAt = 0;
@@ -187,17 +187,17 @@
       $('stage-feedback').textContent = '找到一对小美好。想和你拥有更多共同回忆。'; updateScore();
     } else [a,b].forEach(i=>{state.cards[i].textContent='♡';state.cards[i].classList.remove('flipped');state.cards[i].setAttribute('aria-label',`翻开第 ${i+1} 张回忆`);});
     state.open=[];state.resolveAt=0;
-    if (state.matched===12) {initMemory();$('stage-feedback').textContent='这一页全是美好，下一页也一起收集。';}
+    if (state.matched===symbols.length*2) {initMemory();$('stage-feedback').textContent='这一页全是美好，下一页也一起收集。';}
   }
   function initSequence() {
-    state.sequence = []; state.pads = []; state.length = 3;
+    state.sequence = []; state.pads = []; state.length = 2;
     const grid = document.createElement('div'); grid.className = 'sequence-grid';
     ['🌷 花','🌙 月','💌 信','⭐ 星'].forEach((label,i)=>{
       const button = makeButton(label,()=>{
         if (!active() || state.mode !== 'input') return;
         if (state.sequence[state.input] !== i) { $('stage-feedback').textContent='差一点点！再听一次，慢慢来。'; beginSequence(false); return; }
         state.input++; $('stage-feedback').textContent=`对上了 ${state.input} / ${state.sequence.length} 个暗号`;
-        if (state.input===state.sequence.length) {score++;updateScore();state.length=Math.min(7,state.length+1);beginSequence(true);}
+        if (state.input===state.sequence.length) {score++;updateScore();state.length=Math.min(4,state.length+1);beginSequence(true);}
       });state.pads.push(button);grid.append(button);
     });
     $('playfield').append(grid);
@@ -206,16 +206,16 @@
   }
   function beginSequence(fresh) {
     if (fresh) state.sequence=Array.from({length:state.length},()=>Math.floor(Math.random()*4));
-    state.mode='show';state.step=0;state.input=0;state.due=elapsed+650;
+    state.mode='show';state.step=0;state.input=0;state.due=elapsed+900;
     state.pads.forEach(b=>b.classList.remove('lit'));
     $('stage-feedback').textContent=`先看顺序：这一轮有 ${state.sequence.length} 个暗号。`;
   }
   function stepSequence() {
     if(state.mode!=='show'||elapsed<state.due)return;
     state.pads.forEach(b=>b.classList.remove('lit'));
-    if(state.step >= state.sequence.length*2){state.mode='input';$('stage-feedback').textContent='轮到你了，按刚才的顺序点回来。';return;}
+    if(state.step >= state.sequence.length*2){state.mode='input';$('stage-feedback').textContent='轮到你了：'+state.sequence.map(i=>state.pads[i].textContent).join(' → ');return;}
     if(state.step%2===0){const b=state.pads[state.sequence[state.step/2]];b.classList.add('lit');$('stage-feedback').textContent=`暗号 ${state.step/2+1}：${b.textContent}`;}
-    state.step++;state.due=elapsed+(state.step%2 ? 650 : 250);
+    state.step++;state.due=elapsed+(state.step%2 ? 900 : 400);
   }
   const gifts = [['🌷 鲜花',true],['🧋 奶茶',true],['🫂 拥抱',true],['🍰 蛋糕',true],['🌅 日落',true],['🐈 小猫的呼噜',true],['💼 周末加班',false],['🌧 坏天气',false],['😣 小烦恼',false],['⏰ 早八闹钟',false],['🦟 蚊子',false],['🔋 电量不足',false]];
   function initSort() {

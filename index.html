@@ -7,8 +7,9 @@
   <meta name="description" content="一份有点笨拙、但百分百认真的心动快递。接住爱心，拆开属于你的告白。">
   <title>心动投递局 · 有一份喜欢待签收</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=2">
-  <script src="./app.js?v=2" defer></script>
+  <link rel="stylesheet" href="./style.css?v=3">
+  <script src="./app.js?v=3" defer></script>
+  <script src="./music.js?v=3" defer></script>
 </head>
 <body>
   <svg class="svg-defs" aria-hidden="true"><defs>
@@ -22,6 +23,7 @@
       <a class="brand" href="./" aria-label="心动投递局首页"><span class="brand-symbol"><svg><use href="#icon-heart"/></svg></span><span>心动投递局<small>THE LOVE POST</small></span></a>
       <button id="customize" class="text-button"><svg class="icon"><use href="#icon-mail"/></svg>定制这封信<span aria-hidden="true">↗</span></button>
     </header>
+    <div class="music-bar" aria-label="背景音乐控制"><button id="music-toggle" class="text-button" aria-pressed="false">♫ 开启音乐</button><span class="music-caption" id="music-status" role="status">轻柔八音盒 · 开始旅程时播放</span><label class="volume-control" for="music-volume">音量<input id="music-volume" type="range" min="0" max="100" value="25"></label></div>
     <main id="main">
       <section id="intro" class="screen intro-screen" aria-labelledby="intro-title">
         <div class="intro-copy">
