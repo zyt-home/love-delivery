@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f7f3ea">
-  <meta name="description" content="一份有点笨拙、但百分百认真的心动快递。接住爱心，拆开属于你的告白。">
+  <meta name="description" content="一份有点笨拙、但百分百认真的心动快递。点开信封，读一份属于你的告白。">
   <title>心动投递局 · 有一份喜欢待签收</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=3">
-  <script src="./app.js?v=3" defer></script>
-  <script src="./music.js?v=3" defer></script>
+  <link rel="stylesheet" href="./style.css?v=4">
+  <script src="./app.js?v=4" defer></script>
+  <script src="./music.js?v=4" defer></script>
 </head>
 <body>
   <svg class="svg-defs" aria-hidden="true"><defs>
@@ -23,15 +23,15 @@
       <a class="brand" href="./" aria-label="心动投递局首页"><span class="brand-symbol"><svg><use href="#icon-heart"/></svg></span><span>心动投递局<small>THE LOVE POST</small></span></a>
       <button id="customize" class="text-button"><svg class="icon"><use href="#icon-mail"/></svg>定制这封信<span aria-hidden="true">↗</span></button>
     </header>
-    <div class="music-bar" aria-label="背景音乐控制"><button id="music-toggle" class="text-button" aria-pressed="false">♫ 开启音乐</button><span class="music-caption" id="music-status" role="status">轻柔八音盒 · 开始旅程时播放</span><label class="volume-control" for="music-volume">音量<input id="music-volume" type="range" min="0" max="100" value="25"></label></div>
+    <div class="music-bar" aria-label="背景音乐控制"><button id="music-toggle" class="text-button" aria-pressed="false">♫ 开启音乐</button><span class="music-caption" id="music-status" role="status">轻柔八音盒 · 拆开信封时播放</span><label class="volume-control" for="music-volume">音量<input id="music-volume" type="range" min="0" max="100" value="25"></label></div>
     <main id="main">
       <section id="intro" class="screen intro-screen" aria-labelledby="intro-title">
         <div class="intro-copy">
           <div class="eyebrow"><span class="status-dot"></span>今日营业 · 专送喜欢</div>
           <h1 id="intro-title">有一份<span class="title-heart">喜欢<svg><use href="#icon-spark"/></svg></span>，<br>想亲手交给你。</h1>
           <p class="lead">寄件人有点胆小，快递有点可疑。<br>里面装着一句，练习了很久的话。</p>
-          <div class="hero-actions"><button id="start" class="button primary">签收这份心动<svg class="icon"><use href="#icon-arrow"/></svg></button><button id="suspicious" class="text-button quiet">不会是诈骗吧？</button></div>
-          <p class="small-note"><span aria-hidden="true">↳</span> 五站心动旅程 · 完整体验约 5 分钟 · 随时可以休息</p>
+          <div class="hero-actions"><button id="start" class="button primary">点开这封信<svg class="icon"><use href="#icon-arrow"/></svg></button><button id="suspicious" class="text-button quiet">不会是诈骗吧？</button></div>
+          <p class="small-note"><span aria-hidden="true">↳</span> 轻轻点一下，拆开这份心意。</p>
         </div>
         <div class="parcel-scene" aria-hidden="true">
           <span class="scene-star star-one">✳</span><span class="scene-star star-two">✦</span>
@@ -42,20 +42,8 @@
           <div class="delivery-label"><span>易 心 动</span><small>FRAGILE HEART INSIDE</small></div>
         </div>
       </section>
-      <section id="game" class="screen game-screen" hidden aria-labelledby="game-title">
-        <div class="section-top"><span class="eyebrow" id="stage-label">01 / 心动接收站</span><button class="text-button quiet" id="skip">直接读信 ↗</button></div>
-        <ol class="route" aria-label="心动旅程"><li>接心动</li><li>翻回忆</li><li>记暗号</li><li>选礼物</li><li>约个会</li></ol>
-        <h2 id="game-title" tabindex="-1">喜欢正在向你靠近。</h2>
-        <p id="stage-description" class="section-lead"></p>
-        <div class="journey-meta"><span id="stage-score" role="status">本关收集 0</span><span id="stage-clock">准备出发</span></div>
-        <div class="time-track" aria-hidden="true"><span id="time-fill"></span></div>
-        <div id="playfield" class="playfield"></div>
-        <p id="stage-feedback" class="stage-feedback" role="status"></p>
-        <div class="journey-controls"><button id="stage-start" class="button primary">开始这一站</button><button id="stage-next" class="button primary" hidden>下一站 →</button><button id="pause" class="text-button" hidden>暂停一下</button><button id="exit-game" class="text-button quiet">先回首页</button></div>
-        <p class="small-note">前四站各 60 秒，最后一站慢慢选。切换页面或定制信件时自动暂停；不计输赢，只收集开心。</p>
-      </section>
       <section id="letter" class="screen letter-screen" hidden aria-labelledby="letter-title">
-        <div class="section-top"><span class="eyebrow">终点 / 请本人亲启</span><span class="delivered"><span class="status-dot"></span>已送达</span></div>
+        <div class="section-top"><span class="eyebrow">请本人亲启</span><span class="delivered"><span class="status-dot"></span>已送达</span></div>
         <article class="confession-paper"><div class="paper-top"><span>DEAR <b data-recipient>特别的你</b></span><svg class="icon"><use href="#icon-heart"/></svg></div><h2 id="letter-title" tabindex="-1">其实，<br>我喜欢你。</h2><p id="letter-message">不是手滑发错人，<br>是想了很久，才点下发送。<br><br>想和你一起吃饭、散步，<br>把平平无奇的日子，过成值得期待的明天。</p><div class="signature"><span>笨拙但认真的</span><strong data-sender>某个喜欢你的人</strong><span class="signature-heart" aria-hidden="true">♡</span></div></article>
         <p class="question">所以，要不要给我们一个机会？</p>
         <div class="answer-actions"><button id="yes" class="button primary">好呀，我签收了<svg class="icon"><use href="#icon-heart"/></svg></button><button id="think" class="button secondary">让我想想</button></div>
@@ -66,7 +54,7 @@
         <div class="result-symbol" aria-hidden="true"><svg><use href="#icon-heart"/></svg><span>✦</span></div>
         <p class="eyebrow" id="result-label">DELIVERY COMPLETE</p><h2 id="result-title" tabindex="-1">签收成功，<br>快乐有点超标。</h2><p class="result-copy" id="result-copy"></p>
         <div class="receipt"><span>心动回执</span><strong id="receipt-text">双向奔赴 · 待续</strong><small>NO. 001 / 一份喜欢，认真送达</small></div>
-        <div class="result-actions"><button id="share" class="button primary">复制这份心动的链接<svg class="icon"><use href="#icon-mail"/></svg></button><button id="replay" class="text-button quiet">再玩一次 ↻</button></div>
+        <div class="result-actions"><button id="share" class="button primary">复制这份心动的链接<svg class="icon"><use href="#icon-mail"/></svg></button><button id="replay" class="text-button quiet">再看一次 ↻</button></div>
         <p class="small-note">这份回应只在此刻的页面里，记得亲口告诉对方。</p>
       </section>
       <div class="post-promises" id="promises"><span><svg class="icon"><use href="#icon-mail"/></svg>包邮，包真心</span><span><svg class="icon"><use href="#icon-spark"/></svg>附赠一点傻笑</span><span><svg class="icon"><use href="#icon-heart"/></svg>喜欢，没有保质期</span></div>
